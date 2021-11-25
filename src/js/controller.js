@@ -5,8 +5,6 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
 
-const recipeContainer = document.querySelector('.recipe');
-
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -22,12 +20,12 @@ const controlRecipes = async function () {
     //Render recipe
     recipeView.render(model.state.recipe);
   } catch (error) {
-    alert(error);
+    recipeView.renderError();
   }
 };
 
-controlRecipes();
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
 
-// window.addEventListener('hashchange', controlRecipes);
-// window.addEventListener('load', controlRecipes);
-['hashchange', 'load'].forEach(e => window.addEventListener(e, controlRecipes));
+init();

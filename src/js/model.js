@@ -26,5 +26,7 @@ export const loadRecipe = async function (id) {
   } catch (error) {
     //Temp error handling
     console.error(`${error} 💥`);
+    //Throw error so that the promise is rejected
+    throw error;
   }
 };
