@@ -32,7 +32,7 @@ export default class View {
       // removing elements from the markup.  The first child of the element would be the text
       if (
         !newElement.isEqualNode(currentElement) &&
-        newElement.firstChild.nodeValue.trim() !== ''
+        newElement.firstChild?.nodeValue.trim() !== ''
       ) {
         currentElement.textContent = newElement.textContent;
       }
