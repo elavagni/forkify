@@ -21,6 +21,9 @@ const controlRecipes = async function () {
     //show spinner
     recipeView.renderSpinner();
 
+    //update results to show active recipe
+    resultsView.update(model.getSearchResultsPage());
+
     //Loading recipe
     await model.loadRecipe(id);
 
