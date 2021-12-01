@@ -91,6 +91,7 @@ const controlAddBookmark = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+
 const controlAddRecipe = async function (newRecipe) {
   try {
     //Show loading spinner
@@ -115,9 +116,11 @@ const controlAddRecipe = async function (newRecipe) {
   } catch (error) {
     addRecipeView.renderError(error.message);
   }
-};
+}
+
 
 const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
