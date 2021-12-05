@@ -1,5 +1,6 @@
 import * as model from './models/model.js';
-import { state } from './models/app-state';
+import * as recipeModel from './models/recipeModel.js';
+import { state } from './models/appStateModel.js';
 import { MODAL_CLOSE_SEC } from './config.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
@@ -30,7 +31,7 @@ const controlRecipes = async function () {
     bookmarksView.update(state.bookmarks);
 
     //Loading recipe
-    await model.loadRecipe(id);
+    await recipeModel.loadRecipe(id);
 
     //Render recipe
     recipeView.render(state.recipe);
@@ -70,7 +71,7 @@ const controlPagination = function (goToPage) {
 
 const controlServings = function (newServings) {
   //update the recipe servings (in state)
-  model.updateServings(newServings);
+  recipeModel.updateServings(newServings);
 
   //update the recipe view
   //Render recipe
@@ -102,7 +103,7 @@ const controlAddRecipe = async function (newRecipe) {
     addRecipeView.renderSpinner();
 
     //upload recipe data
-    await model.uploadRecipe(newRecipe);
+    await recipeModel.uploadRecipe(newRecipe);
 
     //Render recipe
     recipeView.render(state.recipe);
