@@ -1,5 +1,5 @@
 import * as model from './models/model.js';
-import { state } from './models/app-state';
+import { state } from './models/appStateModel.js';
 import { MODAL_CLOSE_SEC } from './config.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
