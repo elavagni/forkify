@@ -1,4 +1,4 @@
-import * as model from './models/model.js';
+import * as bookmarksModel from './models/bookmarksModel.js';
 import * as recipeModel from './models/recipeModel.js';
 import * as searchResultsModel from './models/searchResultsModel.js';
 import { state } from './models/appStateModel.js';
@@ -83,9 +83,9 @@ const controlServings = function (newServings) {
 const controlAddBookmark = function () {
   // add or remove bookmark
   if (!state.recipe.bookmarked) {
-    model.addBookmark(state.recipe);
+    bookmarksModel.addBookmark(state.recipe);
   } else {
-    model.deleteBookmark(state.recipe.id);
+    bookmarksModel.deleteBookmark(state.recipe.id);
   }
   // update recipe view
   recipeView.update(state.recipe);
