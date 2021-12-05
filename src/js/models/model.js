@@ -1,17 +1,7 @@
 import { async } from 'regenerator-runtime';
-import { API_KEY, API_URL, RESULTS_PER_PAGE } from './config.js';
-import { AJAX } from './helper.js';
-
-export const state = {
-  recipe: {},
-  search: {
-    query: '',
-    results: [],
-    page: 1,
-    resultsPerPage: RESULTS_PER_PAGE,
-  },
-  bookmarks: [],
-};
+import { API_KEY, API_URL, RESULTS_PER_PAGE } from '../config.js';
+import { AJAX } from '../helper.js';
+import { state } from './app-state.js';
 
 const createRecipeObject = function (data) {
   const { recipe } = data.data;
