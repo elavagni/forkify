@@ -1,5 +1,6 @@
 import * as model from './models/model.js';
 import * as recipeModel from './models/recipeModel.js';
+import * as searchResultsModel from './models/searchResultsModel.js';
 import { state } from './models/appStateModel.js';
 import { MODAL_CLOSE_SEC } from './config.js';
 import recipeView from './views/recipeView.js';
@@ -27,7 +28,7 @@ const controlRecipes = async function () {
     recipeView.renderSpinner();
 
     //update results to show active recipe
-    resultsView.update(model.getSearchResultsPage());
+    resultsView.update(searchResultsModel.getSearchResultsPage());
     bookmarksView.update(state.bookmarks);
 
     //Loading recipe
@@ -49,10 +50,10 @@ const controlSearchResults = async function () {
     if (!query) return;
 
     // Load search results
-    await model.loadSearchResults(query);
+    await searchResultsModel.loadSearchResults(query);
 
     // Render results
-    resultsView.render(model.getSearchResultsPage(1));
+    resultsView.render(searchResultsModel.getSearchResultsPage(1));
 
     //Show pagination
     paginationView.render(state.search);
@@ -63,7 +64,7 @@ const controlSearchResults = async function () {
 
 const controlPagination = function (goToPage) {
   // Render new results
-  resultsView.render(model.getSearchResultsPage(goToPage));
+  resultsView.render(searchResultsModel.getSearchResultsPage(goToPage));
 
   //Show new pagination buttons
   paginationView.render(state.search);
