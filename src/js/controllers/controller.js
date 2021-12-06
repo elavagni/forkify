@@ -1,12 +1,9 @@
 import * as bookmarksModel from '../models/bookmarksModel.js';
-import * as searchResultsModel from '../models/searchResultsModel.js';
 import * as recipeController from '../controllers/recipeController.js';
+import * as searchResultsController from '../controllers/searchResultsController.js';
 import { state } from '../models/appStateModel.js';
 
-import searchView from '../views/searchView.js';
 import recipeView from '../views/recipeView.js';
-import resultsView from '../views/resultsView.js';
-import paginationView from '../views/paginationView.js';
 import bookmarksView from '../views/bookmarksView.js';
 
 import 'core-js/stable';
@@ -16,35 +13,6 @@ import { async } from 'regenerator-runtime';
 if (module.hot) {
   module.hot.accept();
 }
-
-const controlSearchResults = async function () {
-  try {
-    resultsView.renderSpinner();
-
-    // Get search query
-    const query = searchView.getQuery();
-    if (!query) return;
-
-    // Load search results
-    await searchResultsModel.loadSearchResults(query);
-
-    // Render results
-    resultsView.render(searchResultsModel.getSearchResultsPage(1));
-
-    //Show pagination
-    paginationView.render(state.search);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const controlPagination = function (goToPage) {
-  // Render new results
-  resultsView.render(searchResultsModel.getSearchResultsPage(goToPage));
-
-  //Show new pagination buttons
-  paginationView.render(state.search);
-};
 
 const controlAddBookmark = function () {
   // add or remove bookmark
@@ -66,10 +34,9 @@ const controlBookmarks = function () {
 
 const init = function () {
   recipeController.init();
+  searchResultsController.init();
   bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
-  searchView.addHandlerSearch(controlSearchResults);
-  paginationView.addHandlerClick(controlPagination);
 };
 
 init();
