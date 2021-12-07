@@ -1,6 +1,4 @@
 import * as bookmarksModel from '../models/bookmarksModel.js';
-import * as recipeController from '../controllers/recipeController.js';
-import * as searchResultsController from '../controllers/searchResultsController.js';
 import { state } from '../models/appStateModel.js';
 
 import recipeView from '../views/recipeView.js';
@@ -8,13 +6,12 @@ import bookmarksView from '../views/bookmarksView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import { async } from 'regenerator-runtime';
 
 if (module.hot) {
   module.hot.accept();
 }
 
-const controlAddBookmark = function () {
+const toggleBookmark = function () {
   // add or remove bookmark
   if (!state.recipe.bookmarked) {
     bookmarksModel.addBookmark(state.recipe);
@@ -28,15 +25,13 @@ const controlAddBookmark = function () {
   bookmarksView.render(state.bookmarks);
 };
 
-const controlBookmarks = function () {
+const renderBookmarks = function () {
   bookmarksView.render(state.bookmarks);
 };
 
 const init = function () {
-  recipeController.init();
-  searchResultsController.init();
-  bookmarksView.addHandlerRender(controlBookmarks);
-  recipeView.addHandlerAddBookmark(controlAddBookmark);
+  bookmarksView.addHandlerRender(renderBookmarks);
+  recipeView.addHandlerAddBookmark(toggleBookmark);
 };
 
 init();
