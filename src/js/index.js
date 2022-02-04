@@ -8,11 +8,3 @@ import 'regenerator-runtime/runtime';
 if (module.hot) {
   module.hot.accept();
 }
-
-const init = function () {
-  recipeController.init();
-  searchResultsController.init();
-  bookmarksController.init();
-};
-
-init();

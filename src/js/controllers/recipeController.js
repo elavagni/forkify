@@ -72,7 +72,7 @@ export const updateServings = function (newServings) {
   recipeView.update(state.recipe);
 };
 
-export const init = function () {
+const init = function () {
   recipeView.addHandlerRender(getRecipe);
   recipeView.addHandlerUpdateServings(updateServings);
   addRecipeView.addHandlerUpload(addRecipe);

@@ -1,5 +1,6 @@
 import * as bookmarksModel from '../models/bookmarksModel.js';
 import { state } from '../models/appStateModel.js';
+import bookmarksView from '../views/bookmarksView.js';
 
 import recipeView from '../views/recipeView.js';
 import bookmarksView from '../views/bookmarksView.js';

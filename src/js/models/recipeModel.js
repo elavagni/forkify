@@ -1,7 +1,8 @@
 import { async } from 'regenerator-runtime';
 import { API_KEY, API_URL } from '../config.js';
 import { AJAX } from '../helper.js';
-import { state } from './appStateModel';
+import { state } from './appStateModel.js';
+import * as bookmarksModel from '../models/bookmarksModel.js';
 
 const createRecipeObject = function (data) {
   const { recipe } = data.data;
@@ -9,8 +10,9 @@ const createRecipeObject = function (data) {
     id: recipe.id,
     title: recipe.title,
     publisher: recipe.publisher,
-    sourceUrl: recipe.source_url,
-    image: recipe.image_url,
+    //Make sure urls are secured
+    sourceUrl: recipe.source_url.replace('http:', 'https:'),
+    image: recipe.image_url.replace('http:', 'https:'),
     servings: recipe.servings,
     cookingTime: recipe.cooking_time,
     ingredients: recipe.ingredients,
@@ -85,7 +87,7 @@ export const uploadRecipe = async function (newRecipe) {
 
     const data = await AJAX(`${API_URL}?key=${API_KEY}`, recipe);
     state.recipe = createRecipeObject(data);
-    addBookmark(state.recipe);
+    bookmarksModel.addBookmark(state.recipe);
   } catch (error) {
     throw error;
   }

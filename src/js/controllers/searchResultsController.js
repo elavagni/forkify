@@ -38,7 +38,7 @@ const renderPaginatedResults = function (goToPage) {
   paginationView.render(state.search);
 };
 
-export const init = function () {
+const init = function () {
   searchView.addHandlerSearch(search);
   paginationView.addHandlerClick(renderPaginatedResults);
 };
